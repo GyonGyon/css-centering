@@ -22,52 +22,81 @@ const pageHeight = (document) => {
 
 const extendContent = (content, cache = true) => {
     const e = content
+    const tag = e.tagName
     let h
     if (cache) {
         h = e.dataset.height
         h = Number(h)
-        e.setAttribute('data-height', h)
     }
-    log('h >= 0', h >= 0)
     if (!(h >= 0)) {
-        h = pageHeight(e.contentDocument)
+        if (tag === 'IFRAME') {
+            h = pageHeight(e.contentDocument)
+        } else {
+            h = e.scrollHeight
+        }
     }
-    e.style.height = h + 'px'
-    e.setAttribute('data-extend', 'true')
+    updateStyles(e, {
+        height: h + 'px',
+    })
+    if (tag !== 'IFRAME') {
+        setTimeout(() => {
+            updateStyles(e, {
+                height: 'auto',
+            })
+        }, 350)
+    }
+    updateDatas(e, {
+        extend: 'true',
+        height: h,
+    })
 }
 
 const shrinkContent = (content) => {
     let e = content
-    e.setAttribute('data-extend', 'false')
-    e.style.height = 0
+    updateDatas(e, {
+        extend: 'false',
+    })
+    updateStyles(e, {
+        height: 0,
+    })
 }
 
-const resetPieceIframe = (iframe) => {
-    shrinkContent(iframe)
-    iframe.onload = () => {
-        shrinkContent(iframe)
+const resetPieceIframe = (content) => {
+    let e = content
+    shrinkContent(e)
+    e.onload = () => {
+        shrinkContent(e)
     }
 }
 
 const bindPiece = (piece) => {
-    const h2 = find('h2', piece)
-    const iframe = find('iframe', piece)
-    resetPieceIframe(iframe)
-    bind(h2, 'click', () => {
-        const open = iframe.dataset.extend
+    const t = find('.title', piece)
+    const c = find('.content', piece)
+    resetPieceIframe(c)
+    bind(t, 'click', () => {
+        const open = c.dataset.extend
         if (open === 'true') {
-            shrinkContent(iframe)
+            shrinkContent(c)
         } else {
-            extendContent(iframe)
+            extendContent(c)
         }
     })
 }
 
 const bindPieces = () => {
     const pieces = finds('.piece')
-    pieces.forEach((p) => {
+    pieces.forEach((p, i) => {
         bindPiece(p)
     })
+}
+
+const _tempCopyObj = (o) => {
+    window.e = Object.create(null)
+    let e = window.e
+    for (let key in o) {
+        e[key] = o[key]
+    }
+    log(e)
 }
 
 const __main = () => {
