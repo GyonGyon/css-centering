@@ -107,8 +107,7 @@ const shrinkContent = (e) => {
     }
 }
 
-const resetPieceIframe = (content) => {
-    let e = content
+const shrinkAtFirst = (e) => {
     updateStyles(e, {
         height: 0,
     })
@@ -116,14 +115,14 @@ const resetPieceIframe = (content) => {
 
 const bindPiece = (piece) => {
     const t = find('.title', piece)
-    const c = find('.content', piece)
-    resetPieceIframe(c)
+    const e = find('.content', piece)
+    shrinkAtFirst(e)
     bind(t, 'click', () => {
-        const open = c.dataset.extend
+        const open = e.dataset.extend
         if (open === 'true') {
-            shrinkContent(c)
+            shrinkContent(e)
         } else {
-            extendContent(c)
+            extendContent(e)
         }
     })
 }
