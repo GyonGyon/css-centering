@@ -20,53 +20,98 @@ const pageHeight = (document) => {
     return h
 }
 
-const extendContent = (content, cache = true) => {
-    const e = content
-    const tag = e.tagName
+const currentHeight = (e) => {
     let h
-    if (cache) {
-        h = e.dataset.height
-        h = Number(h)
+    if (e.tagName === 'IFRAME') {
+        h = pageHeight(e.contentDocument)
+    } else {
+        h = e.scrollHeight
     }
-    if (!(h >= 0)) {
-        if (tag === 'IFRAME') {
-            h = pageHeight(e.contentDocument)
-        } else {
-            h = e.scrollHeight
-        }
+    return h
+}
+
+const cachedHeight = (e) => {
+    let h
+    h = e.dataset.height
+    h = Number(h)
+    if (h < 0 || isNaN(h)) {
+        h = currentHeight(e)
     }
+    return h
+}
+
+const ensureOneDataTimeout = (e, callback, time) => {
+    let timeout = e.dataset.timeout
+    timeout = Number(timeout)
+    clearTimeout(timeout)
+    timeout = setTimeout(callback, time)
+    updateDatas(e, { timeout })
+}
+
+const extendContent = (e) => {
+    let h
+    const dynamic = e.dataset.dynamic !== undefined
+    if (dynamic) {
+        h = currentHeight(e)
+    } else {
+        h = cachedHeight(e)
+    }
+
+    const time = h / 3000
     updateStyles(e, {
         height: h + 'px',
+        transition: time + 's',
     })
-    if (tag !== 'IFRAME') {
-        setTimeout(() => {
-            updateStyles(e, {
-                height: 'auto',
-            })
-        }, 350)
-    }
     updateDatas(e, {
         extend: 'true',
         height: h,
     })
+
+    // 为了保证高度变化时正确显示内容
+    if (dynamic) {
+        ensureOneDataTimeout(
+            e,
+            () => {
+                updateStyles(e, {
+                    height: 'auto',
+                })
+            },
+            time * 1000
+        )
+    }
 }
 
-const shrinkContent = (content) => {
-    let e = content
+const shrinkContent = (e) => {
     updateDatas(e, {
         extend: 'false',
     })
-    updateStyles(e, {
-        height: 0,
-    })
+
+    const dynamic = e.dataset.dynamic !== undefined
+
+    // 为了触发渐变动画
+    if (dynamic) {
+        const h = currentHeight(e)
+        updateStyles(e, {
+            height: h + 'px',
+            transition: h / 3000 + 's',
+        })
+        ensureOneDataTimeout(e, () => {
+            updateStyles(e, {
+                height: 0,
+            })
+        })
+    } else {
+        updateStyles(e, {
+            height: 0,
+        })
+    }
 }
 
 const resetPieceIframe = (content) => {
     let e = content
-    shrinkContent(e)
-    e.onload = () => {
-        shrinkContent(e)
-    }
+    updateStyles(e, {
+        height: 0,
+    })
 }
 
 const bindPiece = (piece) => {

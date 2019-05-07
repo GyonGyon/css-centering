@@ -38,5 +38,5 @@ iframe {
 .piece .content {
   transition: 0.3s;
   height: 0;
-  overflow: hidden;
+  overflow: scroll;
 }
