@@ -146,24 +146,47 @@ const addClassAll = (selector, className) => {
     }
 }
 
-// ----
+// ---- update attribute ---
+const enumerateTable = (table, callback) => {
+    let i = 0
+    for (let k in table) {
+        if (table.hasOwnProperty(k)) {
+            callback(k, i)
+            i++
+        }
+    }
+}
 
-const updateObject = (object, props) => {
-    Object.keys(props).forEach((prop) => {
-        object[prop] = props[prop]
+const updateTable = (element, table, callback) => {
+    enumerateTable(table, (k) => {
+        const v = table[k]
+        callback(element, k, v)
     })
 }
 
-const updateProps = (element, props) => {
-    updateObject(element, props)
+const updateAttribute = (element, name, value) => {
+    element.setAttribute(name, value)
 }
 
-const updateData = (element, datasetProps) => {
-    updateObject(element.dataset, datasetProps)
+const updateAttributes = (element, table) => {
+    updateTable(element, table, updateAttribute)
 }
 
-const updateStyle = (element, styleProps) => {
-    updateObject(element.style, styleProps)
+const updateData = (element, name, value) => {
+    const k = `data-${name}`
+    element.setAttribute(k, value)
+}
+
+const updateDatas = (element, table) => {
+    updateTable(element, table, updateData)
+}
+
+const updateStyle = (element, name, value) => {
+    element.style[name] = value
+}
+
+const updateStyles = (element, table) => {
+    updateTable(element, table, updateStyle)
 }
 
 // ---- not used ----
@@ -201,8 +224,12 @@ const dom = {
     removeClassAll,
     removeAllChild,
     addClassAll,
-    updateObject,
-    updateProps,
+    enumerateTable,
+
+    // update attributes
+    updateAttribute,
+    updateAttributes,
     updateData,
+    updateDatas,
     updateStyle,
 }
