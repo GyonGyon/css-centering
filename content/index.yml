@@ -1,33 +1,16 @@
 - title: 水平居中
   details:
-      - title1: 容器为块/行内块, 目标为行内元素
-        title2: 'text-align: center'
-        index: 1-1
-      - title1: 容器为块/行内块, 目标为块元素
-        title2: 'margin: auto'
-        index: 1-2
-      - title1: 容器为块/行内块, 目标为行内元素
-        title2: 'text-align: center'
-        index: 1-3
+    # todo: 想个方法让程序自己读文件列表
+    - name: 1.1 inline elements
+    - name: 1.2 block
+    - name: 1.3 inblock & block
+    - name: 1.4 absolute
+    - name: 1.5 float
+    - name: 1.6 flex
+    - name: 1.7 grid
 - title: 垂直居中
   details:
-      - title1: 容器为块/行内块, 目标为行内元素
-        title2: 'text-align: center'
-        index: 2-1
-      - title1: 容器为块/行内块, 目标为行内元素
-        title2: 'text-align: center'
-        index: 2-2
-      - title1: 容器为块/行内块, 目标为行内元素
-        title2: 'text-align: center'
-        index: 2-3
+    - name: 2.1 absolute
 - title: 中心居中
   details:
-      - title1: 容器为块/行内块, 目标为行内元素
-        title2: 'text-align: center'
-        index: 2-1
-      - title1: 容器为块/行内块, 目标为行内元素
-        title2: 'text-align: center'
-        index: 2-2
-      - title1: 容器为块/行内块, 目标为行内元素
-        title2: 'text-align: center'
-        index: 2-3
+    - name: 3.1 float

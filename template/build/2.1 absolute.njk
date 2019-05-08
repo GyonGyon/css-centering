@@ -1,0 +1,79 @@
+{% extends "../iframes.njk" %}
+
+{% block title %}
+    float
+{% endblock %}
+
+{% block style %}
+    .center-parent {
+        position: relative;
+    }
+    .center-y {
+        position: absolute;
+    }
+    .center-y.transform {
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .center-y.margin-auto {
+        margin: auto;
+        height: 50%;
+        top: 0;
+        bottom: 0;
+    }
+    .center-y.margin-minus {
+        top: 50%;
+        height: 50px;
+        margin-top: -25px;
+    }
+{% endblock %}
+
+{% block content %}
+    <h3 class="container">un-static + block/inline-block</h3>
+    由于是绝对定位, 所以一个容器里只能有一个, 否则会重叠
+    <div>
+        <h3>使用 transform</h3>
+        <h3 class="target">absolute + top: 50% + transform: translateY(-50%)</h3>
+        <h3>blcok</h3>
+        <div class="center-parent block fixed-size">
+            <div class="center-y transform block">block</div>
+        </div>
+        <h3>inblcok</h3>
+        <div class="center-parent inblock fixed-size">
+            <div class="center-y transform inblock">inblock</div>
+        </div>
+        <div class="center-parent inblock fixed-size">
+            <div class="center-y transform inline">inline</div>
+        </div>
+    </div>
+    <div>
+        <h3>使用 margin auto</h3>
+        <h3 class="target">absolute + height + margin: auto  + top: 0 + bottom: 0</h3>
+        会自动变得和容器一样高, 所以要设置高度
+        <h3>blcok</h3>
+        <div class="center-parent block fixed-size">
+            <div class="center-y margin-auto block">block</div>
+        </div>
+        <div class="center-parent inblock fixed-size">
+            <div class="center-y margin-auto inblock">inblock</div>
+        </div>
+        <h3>inblcok</h3>
+        <div class="center-parent inblock fixed-size">
+            <div class="center-y margin-auto inline">inline</div>
+        </div>
+        <div>
+            <h3>使用 margin -width/2</h3>
+            <h3 class="target">absolute + top: 50% + height + margin: -height/2</h3>
+            <h3>blcok</h3>
+            <div class="center-parent block fixed-size">
+                <div class="center-y margin-minus block">block</div>
+            </div>
+            <h3>inblcok</h3>
+            <div class="center-parent inblock fixed-size">
+                <div class="center-y margin-minus inblock">inblock</div>
+            </div>
+            <div class="center-parent inblock fixed-size">
+                <div class="center-y margin-minus inline">inline</div>
+            </div>
+        </div>
+    {% endblock %}

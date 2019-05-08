@@ -1,0 +1,26 @@
+{% extends "../iframes.njk" %}
+
+{% block title %}
+    margin auto
+{% endblock %}
+
+{% block style %}
+    .center-x {
+        margin: auto;
+    }
+{% endblock %}
+
+{% block content %}
+    <h3 class="container">block/inline-block</h3>
+    <h3 class="target">block + margin: auto</h3>
+    <div>由于 block 默认 width:100%, 所以为了显示出居中需要定宽</div>
+    <h3>blcok</h3>
+    <div class="center-parent block ">
+        <div class="center-x block fixed-size">block</div>
+        <div class="center-x inblock fixed-size">inblock</div>
+    </div>
+    <h3>inline block</h3>
+    <div class="center-parent inblock fixed-size">
+        <div class="center-x block fixed-size">block</div>
+    </div>
+{% endblock %}

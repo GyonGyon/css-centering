@@ -16,6 +16,9 @@ const log = console.log.bind(console)
 // }
 
 const pageHeight = (document) => {
+    if (document === null) {
+        return 0
+    }
     const h = document.scrollingElement.scrollHeight || document.body.scrollHeight
     return h
 }
@@ -48,6 +51,13 @@ const ensureOneDataTimeout = (e, callback, time) => {
     updateDatas(e, { timeout })
 }
 
+const transitionTime = (h) => {
+    let time = h / 3000
+    const max = 0.3
+    time = time > max ? max : time
+    return time
+}
+
 const extendContent = (e) => {
     let h
     const dynamic = e.dataset.dynamic !== undefined
@@ -57,7 +67,7 @@ const extendContent = (e) => {
         h = cachedHeight(e)
     }
 
-    const time = h / 3000
+    let time = transitionTime(h)
     updateStyles(e, {
         height: h + 'px',
         transition: time + 's',
@@ -93,7 +103,7 @@ const shrinkContent = (e) => {
         const h = currentHeight(e)
         updateStyles(e, {
             height: h + 'px',
-            transition: h / 3000 + 's',
+            transition: transitionTime(h) + 's',
         })
         ensureOneDataTimeout(e, () => {
             updateStyles(e, {
@@ -107,24 +117,29 @@ const shrinkContent = (e) => {
     }
 }
 
-const shrinkAtFirst = (e) => {
+const setHeightAtFirst = (e) => {
     updateStyles(e, {
         height: 0,
+        // height: currentHeight(e) + 'px',
     })
+    extendContent(e)
 }
 
 const bindPiece = (piece) => {
     const t = find('.title', piece)
-    const e = find('.content', piece)
-    shrinkAtFirst(e)
+    const c = find('.content', piece)
+    setHeightAtFirst(c)
     bind(t, 'click', () => {
-        const open = e.dataset.extend
+        const open = c.dataset.extend
         if (open === 'true') {
-            shrinkContent(e)
+            shrinkContent(c)
         } else {
-            extendContent(e)
+            extendContent(c)
         }
     })
+
+    const name = find('.title-name', piece)
+    bind(name, 'click', (e) => e.stopPropagation())
 }
 
 const bindPieces = () => {
@@ -134,18 +149,18 @@ const bindPieces = () => {
     })
 }
 
-const _tempCopyObj = (o) => {
-    window.e = Object.create(null)
-    let e = window.e
-    for (let key in o) {
-        e[key] = o[key]
-    }
-    log(e)
+const delayJumpHash = () => {
+    const h = location.hash
+    location.hash = ''
+    setTimeout(() => {
+        location.hash = h
+    }, 300)
 }
 
 const __main = () => {
     window.onload = () => {
         bindPieces()
+        delayJumpHash()
     }
 }
 

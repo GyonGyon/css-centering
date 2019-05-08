@@ -1,0 +1,63 @@
+{% extends "../iframes.njk" %}
+
+{% block title %}
+    absolute
+{% endblock %}
+
+{% block style %}
+    .center-parent {
+        position: relative;
+    }
+    .center-x {
+        position: absolute;
+    }
+    .transform {
+        left: 50%;
+        transform: translateX(-50%)
+    }
+    .margin {
+        width: 300px;
+        left: 50%;
+        margin-left: -170px;
+    }
+{% endblock %}
+
+{% block content %}
+    <h3 class="container">block/inline-block un-static + width + height</h3>
+    <div>
+
+        <div>使用 transform</div>
+        <h3 class="target">absolute + transform: translateX(-50%)</h3>
+        <h3>blcok</h3>
+        <div class="center-parent fixed-size ">
+            <div class="center-x transform block ">block </div>
+        </div>
+        <h3>inline block</h3>
+        <div class="center-parent fixed-size inblock">
+            <div class="center-x transform block ">inline block</div>
+        </div>
+        <h3>block unfixed size</h3>
+        <div class="center-parent block">
+            父元素的内部在这里
+            <div class="center-x transform block"> block </div>
+        </div>
+    </div>
+    <div>
+
+        <div>使用 margin</div>
+        <h3 class="target">absolute + width + margin: -(width/2) </h3>
+        <h3>blcok</h3>
+        <div class="center-parent fixed-size ">
+            <div class="center-x margin block fixed-size">fixed size block </div>
+        </div>
+        <h3>inline block</h3>
+        <div class="center-parent fixed-size inblock">
+            <div class="center-x margin block fixed-size">fixed size inline block</div>
+        </div>
+        <h3>block unfixed size</h3>
+        <div class="center-parent block">
+            父元素的内部在这里
+            <div class="center-x margin block fixed-size">fixed size  block </div>
+        </div>
+    </div>
+{% endblock %}

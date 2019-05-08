@@ -1,0 +1,29 @@
+{% extends "../iframes.njk" %}
+
+{% block title %}
+    text-align
+{% endblock %}
+
+{% block style %}
+    .center-parent {
+        text-align: center;
+    }
+{% endblock %}
+
+{% block content %}
+
+    <h3 class='container'>block/inline-block + text-align: center</h3>
+    <h3 class='target'>行内元素</h3>
+    <h3>blcok</h3>
+    <div class="center-parent block ">
+        text
+        <div class="inline">inline</div>
+        <div class="inblock">inblock</div>
+    </div>
+    <h3>inline-block fixed-size</h3>
+    <div class="center-parent inblock fixed-size">
+        text
+        <div class="inline">inline</div>
+        <div class="inblock">inblock</div>
+    </div>
+{% endblock %}

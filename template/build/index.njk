@@ -1,4 +1,32 @@
-{% from "../parsedContent.njk" import parsedContent %}
+{% macro blockDetails(props) %}
+    <div class='piece'>
+        <h2 class="title" id="{{ props.name }}" >
+            <button class='prompt'>click</button>
+            <a class="title-name"href="#{{ props.name }}">{{ props.name }}</a>
+        </h2>
+        <iframe class="content" src="./{{ props.name }}.html" frameborder="0" height="0"></iframe>
+
+    </div>
+{% endmacro %}
+
+{% macro blockClass(props) %}
+    <h1 class="title">{{ props.title }}</h1>
+    <div>{{ props.summary }}</div>
+    <div class="content" data-dynamic>
+        {% for d in props.details %}
+            {{ blockDetails(d) }}
+        {% endfor %}
+    </div>
+{% endmacro %}
+
+{% macro parsedContent(content) %}
+    {% for c in content %}
+        <div class="piece">
+            {{ blockClass(c) }}
+        </div>
+    {% endfor %}
+{% endmacro %}
+
 {% extends "../base.njk" %}
 
 {% block title %}
@@ -7,7 +35,7 @@
 
 {% block body %}
     {{ parsedContent(content) }}
-
+    <div class="footer"></div>
     <script src="dom.js"></script>
     <script src="main.js"></script>
 {% endblock %}

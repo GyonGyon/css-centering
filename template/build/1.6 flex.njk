@@ -1,0 +1,28 @@
+{% extends "../iframes.njk" %}
+
+{% block title %}
+    flex
+{% endblock %}
+
+{% block style %}
+    .center-parent {
+        display: flex;
+        justify-content: center;
+    }
+    .center-x {
+
+    }
+{% endblock %}
+
+{% block content %}
+    <h3 class="container">flex + justify-content: center</h3>
+    <h3 class="target"></h3>
+    <h3>flex</h3>
+    <div class="center-parent flex">
+        <div class="block">block </div>
+        text
+        <div class="inline">inline</div>
+        <div class="inblock">inblock</div>
+        <div class="inblock fixed-size">inblock fixed-size</div>
+    </div>
+{% endblock %}
