@@ -1,0 +1,7 @@
+.container::before {
+  content: '容器: '
+}
+
+.target::before {
+  content: '目标: '
+}
