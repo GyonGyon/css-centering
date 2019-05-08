@@ -1,20 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
+{% from "../parsedContent.njk" import parsedContent %}
+{% extends "../base.njk" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="main.css">
+{% block title %}
+    this is title
+    centering css
+{% endblock %}
 
-    <style>
-
-
-    </style>
-</head>
-
-<body>
+{% block body %}
     <div class="piece" >
         <h1 class="title">水平居中</h1>
         <div class="content" data-dynamic>
@@ -38,6 +30,4 @@
 
     <script src="dom.js"></script>
     <script src="main.js"></script>
-</body>
-
-</html>
+{% endblock %}
