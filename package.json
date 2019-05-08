@@ -1,0 +1,15 @@
+{
+  "devDependencies": {
+    "gh-pages": "^2.0.1",
+    "html-minifier": "^4.0.0",
+    "js-yaml": "^3.13.1",
+    "nodemon": "^1.19.0",
+    "nunjucks": "^3.2.0"
+  },
+  "scripts": {
+    "build": "node index.js ",
+    "server": "http-server -a 0.0.0.0 -p 2333",
+    "dev": "nodemon index.js",
+    "deploy": "gh-pages"
+  }
+}
