@@ -6,26 +6,7 @@
 {% endblock %}
 
 {% block body %}
-    <div class="piece" >
-        <h1 class="title">水平居中</h1>
-        <div class="content" data-dynamic>
-            <div class='piece'>
-                <h2 class="title">容器为块/行内块, 目标为行内元素 <br> text-align: center</h2>
-                <iframe class="content" src="./1-1.html" frameborder="0"></iframe>
-
-            </div>
-            <div class='piece'>
-                <h2 class="title">容器为块/行内块, 目标为块元素 <br> margin: auto</h2>
-                <iframe class="content" src="./1-2.html" frameborder="0"></iframe>
-
-            </div>
-
-            <div class='piece'>
-                <h2 class="title">容器为块/行内块, 目标为块元素 <br> margin: auto</h2>
-                <iframe class="content" src="./1-2.html" frameborder="0"></iframe>
-            </div>
-        </div>
-    </div>
+    {{ parsedContent(content) }}
 
     <script src="dom.js"></script>
     <script src="main.js"></script>

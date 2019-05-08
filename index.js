@@ -55,7 +55,7 @@ const buildHtmls = (templatePath) => {
         const n = Path.basename(name, '.njk')
         const t = resolvedPath('./template/build', name)
         const c = loadedContend(n + '.yml')
-        let s = njk.render(t, c)
+        let s = njk.render(t, {content: c})
         s = minifyHtml(s)
         const p = resolvedPath('./public', n + '.html')
         writeFile(p, s)

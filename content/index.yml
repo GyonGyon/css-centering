@@ -2,32 +2,32 @@
   details:
       - title1: 容器为块/行内块, 目标为行内元素
         title2: 'text-align: center'
-        index: 1.1
+        index: 1-1
+      - title1: 容器为块/行内块, 目标为块元素
+        title2: 'margin: auto'
+        index: 1-2
       - title1: 容器为块/行内块, 目标为行内元素
         title2: 'text-align: center'
-        index: 1.1
-      - title1: 容器为块/行内块, 目标为行内元素
-        title2: 'text-align: center'
-        index: 1.1
+        index: 1-3
 - title: 垂直居中
   details:
       - title1: 容器为块/行内块, 目标为行内元素
         title2: 'text-align: center'
-        index: 1.1
+        index: 2-1
       - title1: 容器为块/行内块, 目标为行内元素
         title2: 'text-align: center'
-        index: 1.1
+        index: 2-2
       - title1: 容器为块/行内块, 目标为行内元素
         title2: 'text-align: center'
-        index: 1.1
+        index: 2-3
 - title: 中心居中
   details:
       - title1: 容器为块/行内块, 目标为行内元素
         title2: 'text-align: center'
-        index: 1.1
+        index: 2-1
       - title1: 容器为块/行内块, 目标为行内元素
         title2: 'text-align: center'
-        index: 1.1
+        index: 2-2
       - title1: 容器为块/行内块, 目标为行内元素
         title2: 'text-align: center'
-        index: 1.1
+        index: 2-3

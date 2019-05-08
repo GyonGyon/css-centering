@@ -21,6 +21,8 @@
 
 {% macro parsedContent(content) %}
     {% for c in content %}
+        <div class="piece">
         {{ blockClass(c) }}
+        </div>
     {% endfor %}
 {% endmacro %}

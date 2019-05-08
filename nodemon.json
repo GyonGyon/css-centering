@@ -10,9 +10,8 @@
     "execMap": {
         "js": "node --harmony"
     },
-    "watch": ["template", "static", "utils", "content"],
     "env": {
         "NODE_ENV": "development"
     },
-    "ext": "js css njk"
+    "ext": "js css njk yml"
 }
