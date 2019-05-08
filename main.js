@@ -16,6 +16,9 @@ const log = console.log.bind(console)
 // }
 
 const pageHeight = (document) => {
+    if (document === null) {
+        return 0
+    }
     const h = document.scrollingElement.scrollHeight || document.body.scrollHeight
     return h
 }
@@ -119,13 +122,7 @@ const setHeightAtFirst = (e) => {
         height: 0,
         // height: currentHeight(e) + 'px',
     })
-    e.onload = () => {
-        log('extend')
-    }
     extendContent(e)
-    setTimeout(() => {
-        location.hash = location.hash
-    }, 300)
 }
 
 const bindPiece = (piece) => {
@@ -148,6 +145,7 @@ const bindPiece = (piece) => {
 const bindPieces = () => {
     const pieces = finds('.piece')
     pieces.forEach((p, i) => {
+        log(i, p)
         bindPiece(p)
     })
 }
